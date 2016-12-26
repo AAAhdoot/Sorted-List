@@ -1,0 +1,89 @@
+Ariel Ahdoot and Kinh Hoang
+Testplan Documentation
+
+Our main.c file will contain one long main function in which numerous test cases are run in succession. Because our code was implemented in a way that it would be able to handle any data type given a correct comparison function, our testplan was created to handle integer inputs into the sorted list, under the assumption that if the code works successfully for integers, then it should work successfully for any other data type.
+We created a print function called print_list that will print out the contents of the list starting from the head and printing the integer pointer casted data of each node until we reach the end of the list.
+We also created a conversion function called itv, that will take integers as input and return a void pointer to that same integer.
+We created a compare function called compare that takes in 2 void pointers (that we assume in this case to point to integers), casts them as integer pointers, and then compares the dereferenced values of the two integer pointers and returns 0 if they are equal, -1 if the first input is less than the second, and 1 if the first input is greater than the second.
+Finally, we created a destroy function called destroy that takes in a void pointer to and int t frees the memory at that location.
+We will run through the test cases and print the current sorted list at the end of each test case to prove that the code is running properly.
+Important Notes: 
+1- Attempts to destroy or print using a list or iterator that has already been destroyed and freed will result in an error.
+
+
+Test Case One: Basic insetrions and removals
+	Create list
+		Input: Insert 7, 15, 2, and 5.
+		Expected print_list output: 15->7->5->2
+		Input: Remove 15 and 5.
+		Expected print_list output: 7->2
+		Input: Remove 7 and 2.
+		Expected print_list output:
+	Destroy list
+
+Test Case two: Double add and deletion of a nonexistent object
+	Create list
+		Input: Insert 114, 51, and 114, Remove 87, and Insert 12.
+		Expected print_list output: 114->51->12
+	Destroy list
+
+Test Case three:  Zero and negative check
+	Create list
+		Input: Insert 12, 0, -2
+		Expected print_list output: 12->0->-2
+		Input: Remove 0
+		Expected print_list output: 12->-2
+	Destroy list
+
+Test Case four: Delete nodes with iterators and re-enter the list using get next
+	Create list
+		Input: Insert 128, 35, -2
+		Expected print_list output: 128->35->-2
+		Input: Create Iterator iter, iter2 and NextItem(iter2)
+		Input: Remove 128, 35
+		Expected print_list output: -2
+		Expected GetItem output iter->128 iter2-> 35
+		Expected NextItem output iter->-2 iter2->-2
+	Destroy list
+
+Test Case Five: Delete nodes with iterators and exit list using get next
+	Create list:
+		Input: Insert 25, 65, 56
+		Expected print_list output: 64->56->25
+		Input: Create Iterator iter, iter2 and NextItem(iter), NextItem(iter2)x2
+		Input: Remove 56, 25
+		Expected print_list output: 64
+		Expected GetItem output iter->56 iter2-> 25
+		Expected NextItem output iter->NULL iter2->NULL
+	Destroy list
+
+
+Test Case Six: Destroy list with 2 active iterators
+	Create list:
+		Input: Insert 8, 1, 9, 456
+		Expected print_list output: 456->9->8->1
+		Input: Create Iterator iter, iter2 and NextItem(iter), NextItem(iter2)x2
+	Destroy list
+		Expected GetItem output iter->9 iter2->8
+		Expected NextItem output iter->NULL iter2->NULL
+
+
+Test Case Seven: Destroy iterator with on deleted nodes for Valgrind memcheck
+	Create list:
+		Input: Insert 15, 32, 84
+		Expected print_list output: 84->32->15
+		Input: Create Iterator iter 
+		Input: Remove 84, 32
+		Expected print_list output: 15
+		Input: Destroy Iterator iter
+	Destroy list
+
+
+
+
+
+
+
+
+
+
